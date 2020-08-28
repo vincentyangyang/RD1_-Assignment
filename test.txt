@@ -1,0 +1,7 @@
+create table rainfall(
+    rId int primary key auto_increment,
+    city varchar(10) not null,
+    station varchar(10) not null,
+    hour varchar(10) not null,
+    day varchar(10) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -7,44 +7,54 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
 import pymysql
-conn = pymysql.connect(host='127.0.0.1',user='root',password='root',database='meteorological',charset='utf8')
+conn = pymysql.connect(host='127.0.0.1',user='root',password='123456789',database='meteorological',charset='utf8')
 cursor = conn.cursor()
 
-url = "https://www.cwb.gov.tw/V8/C/P/Rainfall/Rainfall_Hour.html?ID=1"
 
 options = Options()
 options.add_argument('--headless')
 options.add_argument('--disable-gpu')
 
-driver = webdriver.Chrome(executable_path="/Users/admin/Documents/chromedriver",chrome_options=options)
-driver.get(url);
-
-try:
-    WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,'Rainfall_MOD')))
-finally:
-    content = driver.find_elements_by_css_selector('#Rainfall_MOD tr')
-    i=1
-    for tr in content:
-        name = tr.find_elements_by_css_selector('th')
-        font = tr.find_elements_by_css_selector('font')
-
-        if(font[0].text == ""): break
+# driver = webdriver.Chrome(executable_path="/Users/admin/Documents/chromedriver",chrome_options=options)
+driver = webdriver.Chrome(executable_path="C://chromedriver.exe",chrome_options=options)
 
 
-        station = name[0].text
-        if (font[0].text == '-'): hour = "無雨"
-        else: hour = font[0].text
+def updateRainfall():
+    url = "https://www.cwb.gov.tw/V8/C/P/Rainfall/Rainfall_Hour.html?ID=22"
+    driver.get(url)
 
-        if (font[24].text == '-'): day = "無雨"
-        else: day = font[24].text
+    try:
+        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,'Rainfall_MOD')))
+    finally:
+        content = driver.find_elements_by_css_selector('#Rainfall_MOD tr')
+        for tr in content:
 
-        print(station)
-        print(hour)
-        print(day)
-        print('-'*30)
+            td = tr.find_elements_by_css_selector('td')
+            name = tr.find_elements_by_css_selector('th')
+            font = tr.find_elements_by_css_selector('font')
 
-    #     sql = "insert into rainfall(city,station,hour,day) values(%s,%s,%s,%s)"
-    #     cursor.execute(sql,("臺北",station,hour,day))
-    #     conn.commit()
 
-    # cursor.close()
+            if(font[0].text == ""): break
+
+            city = (td[0].text)[0:3]
+
+            station = name[0].text
+
+            if (font[0].text == '-'): hour = "0"
+            elif(font[0].text == 'X'): hour = "無資料"
+            else: hour = font[0].text
+
+            if (font[24].text == '-'): day = "0"
+            elif(font[24].text == 'X'): day = "無資料"
+            else: day = font[24].text
+
+            sql = "insert into rainfall(city,station,hour,day) values(%s,%s,%s,%s)"
+            cursor.execute(sql,(city,station,hour,day))
+            # sql = "update rainfall set hour = %s,day = %s where station = %s and city = %s"
+            # cursor.execute(sql,(hour,day,station,city))
+            conn.commit()
+
+  
+updateRainfall() 
+
+cursor.close()

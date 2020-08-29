@@ -57,4 +57,5 @@ def updateRainfall():
   
 updateRainfall() 
 
+driver.close()
 cursor.close()

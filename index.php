@@ -15,9 +15,14 @@ if (isset($_GET["id"])){
 
     $rows = $sth->fetch();
 
-    $sth = $db->prepare("select * from rainfall where city = :city");
-    $sth->bindParam("city", $rows['city'], PDO::PARAM_STR,50);  
-    $sth->execute();
+    $sthTwo = $db->prepare("select * from rainfall where city = :city");
+    $sthTwo->bindParam("city", $rows['city'], PDO::PARAM_STR,50);  
+    $sthTwo->execute();
+
+    $sthThree = $db->prepare("select * from weather where city = :city");
+    $sthThree->bindParam("city", $rows['city'], PDO::PARAM_STR,50);  
+    $sthThree->execute();
+    $nowWeather = $sthThree->fetch();
 
 }
 
@@ -57,7 +62,7 @@ if (isset($_GET["id"])){
 
         <li class="nav-item dropdown active" style="margin-left: 50px;">
             <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                請選擇城市
+                <?= isset($rows['city']) ? $rows['city']:"請選擇城市" ?>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -97,9 +102,15 @@ if (isset($_GET["id"])){
         
     </div>
 
+    
+
 
     <div id="weather" style="float:left;">
         <?= $rows['html'] ?>
+    </div>
+
+    <div id="today" style="background:	#CCCCFF;">
+        <p class="p"></p>
     </div>
 
     <div id="rain">
@@ -117,7 +128,7 @@ if (isset($_GET["id"])){
 
             <tbody>
                 <?php if( isset($_GET["id"]) ) {
-                    while($rainfall = $sth->fetch() ) {
+                    while($rainfall = $sthTwo->fetch() ) {
                 ?>
                         <tr>
                             <td><?= $rainfall['city'] ?></td>
@@ -157,10 +168,17 @@ if (isset($_GET["id"])){
                 var imgWidth = $("#img").width();
                 var imgHeight = $("#img").height();
                 imgWidth = imgWidth/(imgHeight/213);
+                $("#today").css({"width":imgWidth,"height":"177px","margin-top":"213px","position":"absolute","padding-left":"10px"});
+                var nowWeather = "<?= $nowWeather['firstDay'] ?>";
+
+                nowWeather = nowWeather.replace("。","<br>");
+
+                $(".p").html("<h4>現在天氣：</h4>"+nowWeather);
                 $("#img").css({"width":imgWidth,"height":"213px","display":"block"});
                 imgWidth = 1425-imgWidth;
-                console.log(imgWidth);
+
                 $("#weather").css({"float":"left","width":imgWidth});
+                
             }, 200);
 
         }else{

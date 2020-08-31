@@ -20,6 +20,7 @@ foreach($citys as $city){
 
     for($i=0;$i<14;$i++){
         $weather = $city['weatherElement']['10']['time'][$i]['elementValue']['0']['value'];
+        $weather = str_replace("。","<br>",$weather);
         array_push($weathers,$weather);
     }
 

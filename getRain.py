@@ -7,16 +7,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
 import pymysql
-conn = pymysql.connect(host='127.0.0.1',user='root',password='123456789',database='meteorological',charset='utf8')
+conn = pymysql.connect(host='127.0.0.1',user='root',password='root',database='meteorological',charset='utf8')
 cursor = conn.cursor()
 
 
 options = Options()
-options.add_argument('--headless')
-options.add_argument('--disable-gpu')
+# options.add_argument('--headless')
+# options.add_argument('--disable-gpu')
 
-# driver = webdriver.Chrome(executable_path="/Users/admin/Documents/chromedriver",chrome_options=options)
-driver = webdriver.Chrome(executable_path="C://chromedriver.exe",chrome_options=options)
+driver = webdriver.Chrome(executable_path="/Users/admin/Documents/chromedriver",chrome_options=options)
+# driver = webdriver.Chrome(executable_path="C://chromedriver.exe",chrome_options=options)
 
 
 def updateRainfall():
@@ -59,3 +59,4 @@ updateRainfall()
 
 driver.close()
 cursor.close()
+conn.close()

@@ -22,6 +22,7 @@ if (isset($_GET["id"])){
     $sthThree = $db->prepare("select * from weather where city = :city");
     $sthThree->bindParam("city", $rows['city'], PDO::PARAM_STR,50);  
     $sthThree->execute();
+
     $nowWeather = $sthThree->fetch();
 
 }
@@ -161,6 +162,7 @@ if (isset($_GET["id"])){
                 svg = svg.replace("http://localhost:8000","");
                 $("img").eq(i).prop("src","https://www.cwb.gov.tw"+svg);
                 $("i").remove();
+                $(".tem-F").remove();
             } 
  
             $("#cityImg").html("<img id='img' style='display:none;' src='image/<?= $_GET["id"] ?>.jpg'>");
@@ -176,10 +178,31 @@ if (isset($_GET["id"])){
                 $(".p").html("<h4>現在天氣：</h4>"+nowWeather);
                 $("#img").css({"width":imgWidth,"height":"213px","display":"block"});
                 imgWidth = 1425-imgWidth;
-
                 $("#weather").css({"float":"left","width":imgWidth});
                 
             }, 200);
+
+            for(i=0;i<14;i++){
+                $("td").eq(i).addClass("hover");
+            }
+
+            $(".hover").mouseover(function(){
+                var c = $(this).parent().prop("class");
+                var eq;
+                if (c == "day"){
+                    eq = $(this).index();
+                    console.log(eq);
+                    eq += 2;
+                }else{
+                    eq = $(this).index();
+                    eq += 3;
+                }
+                console.log(eq);
+                var w = <?= json_encode($nowWeather) ?>;
+                // console.log(w[eq]);
+            })
+            
+            
 
         }else{
             $("#rain").hide();

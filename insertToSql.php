@@ -8,11 +8,12 @@ header("content-type:text/html; charset=utf-8");
 $db = new PDO("mysql:host=127.0.0.1;dbname=meteorological", "root", "root");
 $db->exec("SET CHARACTER SET utf8");
 
-$contents = file_get_contents("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-BE1D27BE-4C21-406E-A26B-AA5B70F2D141");
+$week = file_get_contents("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-BE1D27BE-4C21-406E-A26B-AA5B70F2D141");
 
-$contents = json_decode($contents,true);
+$week = json_decode($week,true);
 
-$citys = $contents['records']['locations']['0']['location'];
+$citys = $week['records']['locations']['0']['location'];
+
 
 $sth = $db->prepare("select * from weather");
 $sth->execute();
@@ -22,7 +23,7 @@ if(empty($row)){
     foreach($citys as $city){
         $name = $city['locationName'];
         $weathers = array();
-    
+
         for($i=0;$i<14;$i++){
             $weather = $city['weatherElement']['10']['time'][$i]['elementValue']['0']['value'];
             $weather = str_replace("。","<br>",$weather);

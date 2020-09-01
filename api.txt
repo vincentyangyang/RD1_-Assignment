@@ -1,3 +1,6 @@
 授權碼：CWB-BE1D27BE-4C21-406E-A26B-AA5B70F2D141
 
 一週天氣預報：https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-BE1D27BE-4C21-406E-A26B-AA5B70F2D141
+兩天天氣預報：https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-089?Authorization=CWB-BE1D27BE-4C21-406E-A26B-AA5B70F2D141&elementName=WeatherDescription
+
+

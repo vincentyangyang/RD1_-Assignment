@@ -12,6 +12,7 @@ CREATE INDEX idx_city ON rainfall(city);
 create table weather(
     wId int primary key auto_increment,
     city varchar(10) not null,
+    now varchar(100) not null, 
     firstDay varchar(100) not null, 
     secondDay varchar(100) not null,
     thirdDay varchar(100) not null,  
@@ -35,15 +36,23 @@ create table getHtml(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
-
-        <?php while($rainfall = $sth->fetch() ) {?>
-
-<tr>
-    <td><?= $rainfall['city'] ?></td>
-    <td><?= $rainfall['station'] ?></td>
-    <td><?= $rainfall['hour'] ?></td>
-    <td><?= $rainfall['day'] ?></td>
-</tr>
-
-<? } ?>
+create table twoDay(
+    tId int primary key auto_increment,
+    city varchar(10) not null,
+    one varchar(100) not null,
+    two varchar(100) not null,
+    three varchar(100) not null,
+    four varchar(100) not null,
+    five varchar(100) not null,
+    six varchar(100) not null,
+    seven varchar(100) not null,
+    eight varchar(100) not null,
+    nine varchar(100) not null,
+    ten varchar(100) not null,
+    eleven varchar(100) not null,
+    twelve varchar(100) not null,
+    thirteen varchar(100) not null,
+    fourteen varchar(100) not null,
+    fifteen varchar(100) not null,
+    sixteen varchar(100) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

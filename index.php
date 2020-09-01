@@ -2,7 +2,6 @@
 
 header("content-type:text/html; charset=utf-8");
 
-include_once("getData.php");
 
 if (isset($_GET["id"])){
 
@@ -28,6 +27,8 @@ if (isset($_GET["id"])){
 
     $db = null;
 
+}else{
+    include_once("getData.php");
 }
 
 
@@ -38,7 +39,7 @@ if (isset($_GET["id"])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>個人氣象站</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.cwb.gov.tw/V8/assets/css/main.css?v=20200415">
@@ -116,30 +117,33 @@ if (isset($_GET["id"])){
         <p class="p"></p>
     </div>
 
-    <div class="nav-item dropdown" style="clear: both; background:#187ac8;">
-        <a style="width:150px; margin:auto;" id="day" class="nav-link dropdown-toggle text-white text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            未來兩天天氣
-        </a>
+    <?php if( isset($_GET["id"]) ) { ?>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin: auto;">
-            <a class="dropdown-item" type="button" onclick="tomorrow('明天')" >明天</a>
-            <a class="dropdown-item" type="button" onclick="tomorrow('後天')" >後天</a>
+        <div class="nav-item dropdown" style="clear: both; background:#187ac8;">
+            <a style="width:150px; margin:auto;" id="day" class="nav-link dropdown-toggle text-white text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                未來兩天天氣
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="margin: auto;">
+                <a class="dropdown-item" type="button" onclick="tomorrow('明天')" >明天</a>
+                <a class="dropdown-item" type="button" onclick="tomorrow('後天')" >後天</a>
+            </div>
+
+            <table style="margin-top: 0px;" style="margin-top: 50px;" class="table table-hover table-striped">
+
+
+
+                <tbody>
+
+        
+                        <tr id="twoDayId">
+                        </tr>
+                </tbody>
+
+            </table>
+
         </div>
-
-        <table style="margin-top: 0px;" style="margin-top: 50px;" class="table table-hover table-striped">
-
-
-
-            <tbody>
-
-       
-                    <tr id="twoDayId">
-                    </tr>
-            </tbody>
-
-        </table>
-
-    </div>
+    <?php } ?>
 
     <div id="rain">
 

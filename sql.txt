@@ -12,19 +12,19 @@ CREATE INDEX idx_city ON rainfall(city);
 create table weather(
     wId int primary key auto_increment,
     city varchar(10) not null,
-    firstDay varchar(100) not null,
-    firstNight varchar(100) not null,
+    firstDay varchar(100) not null, 
     secondDay varchar(100) not null,
-    secondNight varchar(100) not null,
-    thirdDay varchar(100) not null,
-    thirdNight varchar(100) not null,
+    thirdDay varchar(100) not null,  
     fourthDay varchar(100) not null,
-    fourthNight varchar(100) not null,
     fifthDay varchar(100) not null,
-    fifthNight varchar(100) not null,
     sixthDay varchar(100) not null,
-    sixthNight varchar(100) not null,
     seventhDay varchar(100) not null,
+    firstNight varchar(100) not null,
+    secondNight varchar(100) not null,
+    thirdNight varchar(100) not null,
+    fourthNight varchar(100) not null,
+    fifthNight varchar(100) not null,
+    sixthNight varchar(100) not null,
     seventhNight varchar(100) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

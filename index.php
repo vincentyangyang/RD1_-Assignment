@@ -175,7 +175,7 @@ if (isset($_GET["id"])){
 
                 nowWeather = nowWeather.replace("。","<br>");
 
-                $(".p").html("<h4>現在天氣：</h4>"+nowWeather);
+                $(".p").html("<h4 class='text-primary'>現在天氣：</h4>"+nowWeather);
                 $("#img").css({"width":imgWidth,"height":"213px","display":"block"});
                 imgWidth = 1425-imgWidth;
                 $("#weather").css({"float":"left","width":imgWidth});
@@ -187,19 +187,28 @@ if (isset($_GET["id"])){
             }
 
             $(".hover").mouseover(function(){
-                var c = $(this).parent().prop("class");
+                var parent = $(this).parent().prop("class");
                 var eq;
-                if (c == "day"){
+
+                var w = <?= json_encode($nowWeather) ?>;
+
+                if (parent == "day"){
                     eq = $(this).index();
                     console.log(eq);
                     eq += 2;
+                    $(this).append("<div class='toast' data-autohide='false'><div class='toast-header text-primary'>天氣概況</div><div class='toast-body'><small>"+w[eq]+"</small></div></div>")
+                    $('.toast').toast('show');
                 }else{
                     eq = $(this).index();
-                    eq += 3;
+                    eq += 9;
+                    $(this).append("<div class='toast' data-autohide='false'><div class='toast-header text-primary'>天氣概況</div><div class='toast-body'><small>"+w[eq]+"</small></div></div>")
+                    $('.toast').toast('show');
                 }
-                console.log(eq);
-                var w = <?= json_encode($nowWeather) ?>;
-                // console.log(w[eq]);
+
+            })
+
+            $(".hover").mouseout(function(){
+                $('.toast').remove();
             })
             
             

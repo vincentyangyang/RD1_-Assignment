@@ -26,36 +26,72 @@ def updateRainfall():
     try:
         WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,'Rainfall_MOD')))
     finally:
-        content = driver.find_elements_by_css_selector('#Rainfall_MOD tr')
-        for tr in content:
+        sql = "show tables where Tables_in_meteorological = 'rainfall'"
+        cursor.execute(sql)
+        
+        if (cursor.rowcount == 0):
+            sql = """create table rainfall(
+                rId int primary key auto_increment,
+                city varchar(10) not null,
+                station varchar(10) not null,
+                hour varchar(10) not null,
+                day varchar(10) not null
+                )ENGINE=InnoDB DEFAULT CHARSET=utf8
+               """
+            cursor.execute(sql)
 
-            td = tr.find_elements_by_css_selector('td')
-            name = tr.find_elements_by_css_selector('th')
-            font = tr.find_elements_by_css_selector('font')
+            insertSQL()
+        else:
+            sql = "drop table rainfall"
+            cursor.execute(sql)
+
+            sql = """create table rainfall(
+                rId int primary key auto_increment,
+                city varchar(10) not null,
+                station varchar(10) not null,
+                hour varchar(10) not null,
+                day varchar(10) not null
+                )ENGINE=InnoDB DEFAULT CHARSET=utf8
+               """
+            cursor.execute(sql)
+
+            insertSQL()
 
 
-            if(font[0].text == ""): break
+def insertSQL():
+    content = driver.find_elements_by_css_selector('#Rainfall_MOD tr')
+    i = 1
+    for tr in content:
+        print(i)
+        i += 1
 
-            city = (td[0].text)[0:3]
+        td = tr.find_elements_by_css_selector('td')
+        name = tr.find_elements_by_css_selector('th')
+        font = tr.find_elements_by_css_selector('font')
 
-            station = name[0].text
 
-            if (font[0].text == '-'): hour = "0"
-            elif(font[0].text == 'X'): hour = "無資料"
-            else: hour = font[0].text
+        if(font[0].text == ""): break
 
-            if (font[24].text == '-'): day = "0"
-            elif(font[24].text == 'X'): day = "無資料"
-            else: day = font[24].text
+        city = (td[0].text)[0:3]
 
-            sql = "insert into rainfall(city,station,hour,day) values(%s,%s,%s,%s)"
-            cursor.execute(sql,(city,station,hour,day))
-            # sql = "update rainfall set hour = %s,day = %s where station = %s and city = %s"
-            # cursor.execute(sql,(hour,day,station,city))
-            conn.commit()
+        station = name[0].text
 
-  
+        if (font[0].text == '-'): hour = "0"
+        elif(font[0].text == 'X'): hour = "無資料"
+        else: hour = font[0].text
+
+        if (font[24].text == '-'): day = "0"
+        elif(font[24].text == 'X'): day = "無資料"
+        else: day = font[24].text
+
+
+        sql = "insert into rainfall(city,station,hour,day) values(%s,%s,%s,%s)"
+        cursor.execute(sql,(city,station,hour,day))
+        conn.commit()
+
+
 updateRainfall() 
+
 
 driver.close()
 cursor.close()

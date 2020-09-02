@@ -14,6 +14,7 @@ $rows = $sth->fetchAll();
 
 $i = 0;
 
+//抓當前天氣放到weather
 foreach($nowWeathers as $nowWeather){
     $now = $nowWeather['weatherElement']['0']['time']['0']['elementValue']['0']['value'];
 
@@ -27,7 +28,7 @@ foreach($nowWeathers as $nowWeather){
 
 
 
-
+//抓未來兩天放到twoDay
 $k = 0;
 
 $sth = $db->prepare("select * from twoDay");

@@ -1,58 +1,172 @@
-create table rainfall(
-    rId int primary key auto_increment,
-    city varchar(10) not null,
-    station varchar(10) not null,
-    hour varchar(10) not null,
-    day varchar(10) not null
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create database memteorological default character set utf8;
+use memteorological;
+
+-- phpMyAdmin SQL Dump
+-- version 4.9.3
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1:3306
+-- 產生時間： 2020 年 09 月 02 日 03:24
+-- 伺服器版本： 5.7.26
+-- PHP 版本： 7.4.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- 資料庫： `meteorological`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `getHtml`
+--
+
+CREATE TABLE `getHtml` (
+  `hId` int(11) NOT NULL,
+  `city` varchar(10) NOT NULL,
+  `html` varchar(10000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `getHtml`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `rainfall`
+--
+
+CREATE TABLE `rainfall` (
+  `rId` int(11) NOT NULL,
+  `city` varchar(10) NOT NULL,
+  `station` varchar(10) NOT NULL,
+  `hour` varchar(10) NOT NULL,
+  `day` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `rainfall`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `twoDay`
+--
+
+CREATE TABLE `twoDay` (
+  `tId` int(11) NOT NULL,
+  `city` varchar(10) NOT NULL,
+  `one` varchar(100) NOT NULL,
+  `two` varchar(100) NOT NULL,
+  `three` varchar(100) NOT NULL,
+  `four` varchar(100) NOT NULL,
+  `five` varchar(100) NOT NULL,
+  `six` varchar(100) NOT NULL,
+  `seven` varchar(100) NOT NULL,
+  `eight` varchar(100) NOT NULL,
+  `nine` varchar(100) NOT NULL,
+  `ten` varchar(100) NOT NULL,
+  `eleven` varchar(100) NOT NULL,
+  `twelve` varchar(100) NOT NULL,
+  `thirteen` varchar(100) NOT NULL,
+  `fourteen` varchar(100) NOT NULL,
+  `fifteen` varchar(100) NOT NULL,
+  `sixteen` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `twoDay`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `weather`
+--
+
+CREATE TABLE `weather` (
+  `wId` int(11) NOT NULL,
+  `city` varchar(10) NOT NULL,
+  `now` varchar(100) DEFAULT NULL,
+  `firstDay` varchar(100) NOT NULL,
+  `secondDay` varchar(100) NOT NULL,
+  `thirdDay` varchar(100) NOT NULL,
+  `fourthDay` varchar(100) NOT NULL,
+  `fifthDay` varchar(100) NOT NULL,
+  `sixthDay` varchar(100) NOT NULL,
+  `seventhDay` varchar(100) NOT NULL,
+  `firstNight` varchar(100) NOT NULL,
+  `secondNight` varchar(100) NOT NULL,
+  `thirdNight` varchar(100) NOT NULL,
+  `fourthNight` varchar(100) NOT NULL,
+  `fifthNight` varchar(100) NOT NULL,
+  `sixthNight` varchar(100) NOT NULL,
+  `seventhNight` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `weather`
+--
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `getHtml`
+--
+ALTER TABLE `getHtml`
+  ADD PRIMARY KEY (`hId`);
+
+--
+-- 資料表索引 `rainfall`
+--
+ALTER TABLE `rainfall`
+  ADD PRIMARY KEY (`rId`);
+
+--
+-- 資料表索引 `twoDay`
+--
+ALTER TABLE `twoDay`
+  ADD PRIMARY KEY (`tId`);
+
+--
+-- 資料表索引 `weather`
+--
+ALTER TABLE `weather`
+  ADD PRIMARY KEY (`wId`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `getHtml`
+--
+ALTER TABLE `getHtml`
+  MODIFY `hId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `rainfall`
+--
+ALTER TABLE `rainfall`
+  MODIFY `rId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `twoDay`
+--
+ALTER TABLE `twoDay`
+  MODIFY `tId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `weather`
+--
+ALTER TABLE `weather`
+  MODIFY `wId` int(11) NOT NULL AUTO_INCREMENT;
+
 
 CREATE INDEX idx_city ON rainfall(city);
-
-
-create table weather(
-    wId int primary key auto_increment,
-    city varchar(10) not null,
-    now varchar(100) not null, 
-    firstDay varchar(100) not null, 
-    secondDay varchar(100) not null,
-    thirdDay varchar(100) not null,  
-    fourthDay varchar(100) not null,
-    fifthDay varchar(100) not null,
-    sixthDay varchar(100) not null,
-    seventhDay varchar(100) not null,
-    firstNight varchar(100) not null,
-    secondNight varchar(100) not null,
-    thirdNight varchar(100) not null,
-    fourthNight varchar(100) not null,
-    fifthNight varchar(100) not null,
-    sixthNight varchar(100) not null,
-    seventhNight varchar(100) not null
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-create table getHtml(
-    hId int primary key auto_increment,
-    city varchar(10) not null,
-    html varchar(10000) not null
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-create table twoDay(
-    tId int primary key auto_increment,
-    city varchar(10) not null,
-    one varchar(100) not null,
-    two varchar(100) not null,
-    three varchar(100) not null,
-    four varchar(100) not null,
-    five varchar(100) not null,
-    six varchar(100) not null,
-    seven varchar(100) not null,
-    eight varchar(100) not null,
-    nine varchar(100) not null,
-    ten varchar(100) not null,
-    eleven varchar(100) not null,
-    twelve varchar(100) not null,
-    thirteen varchar(100) not null,
-    fourteen varchar(100) not null,
-    fifteen varchar(100) not null,
-    sixteen varchar(100) not null
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;

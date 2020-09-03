@@ -1,20 +1,18 @@
 <?php
 
-// exec("/usr/local/bin/python3 getWeek.py");
+
+require("config.php");
+
+//執行python檔
 pclose(popen('/usr/local/bin/python3 getWeek.py', 'r'));
 
-header("content-type:text/html; charset=utf-8");
-
-$db = new PDO("mysql:host=127.0.0.1;dbname=meteorological", "root", "root");
-$db->exec("SET CHARACTER SET utf8");
-
 $week = file_get_contents("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-BE1D27BE-4C21-406E-A26B-AA5B70F2D141");
-
 $week = json_decode($week,true);
 
 $citys = $week['records']['locations']['0']['location'];
 
 
+//一週天氣概況
 $sth = $db->prepare("select * from weather");
 $sth->execute();
 $row = $sth->fetch();

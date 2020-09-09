@@ -27,32 +27,32 @@ cursor.execute(sql)
 
 if cursor.rowcount == 0:
     for key,value in city.items():
-    url = "https://www.cwb.gov.tw/V8/C/W/County/County.html?CID="+value
-    driver.get(url)
-    try:
-        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,'table_top')))
-    finally:
-        content = BeautifulSoup(driver.page_source,"html.parser")
+        url = "https://www.cwb.gov.tw/V8/C/W/County/County.html?CID="+value
+        driver.get(url)
+        try:
+            WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,'table_top')))
+        finally:
+            content = BeautifulSoup(driver.page_source,"html.parser")
 
-        html = content.find('div',class_='sevenDaysReport')
+            html = content.find('div',class_='sevenDaysReport')
 
-        sql = "insert into getHtml(city,html) values(%s,%s)"
-        cursor.execute(sql,[key,str(html)])
-        conn.commit()
+            sql = "insert into getHtml(city,html) values(%s,%s)"
+            cursor.execute(sql,[key,str(html)])
+            conn.commit()
 else:
     for key,value in city.items():
-    url = "https://www.cwb.gov.tw/V8/C/W/County/County.html?CID="+value
-    driver.get(url)
-    try:
-        WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,'table_top')))
-    finally:
-        content = BeautifulSoup(driver.page_source,"html.parser")
+        url = "https://www.cwb.gov.tw/V8/C/W/County/County.html?CID="+value
+        driver.get(url)
+        try:
+            WebDriverWait(driver,30).until(EC.presence_of_element_located((By.ID,'table_top')))
+        finally:
+            content = BeautifulSoup(driver.page_source,"html.parser")
 
-        html = content.find('div',class_='sevenDaysReport')
+            html = content.find('div',class_='sevenDaysReport')
 
-        sql = "update getHtml set html = %s where city = %s"
-        cursor.execute(sql,[str(html),key])
-        conn.commit()
+            sql = "update getHtml set html = %s where city = %s"
+            cursor.execute(sql,[str(html),key])
+            conn.commit()
 
 
 

@@ -62,37 +62,37 @@
 
         <ul class="navbar-nav">
 
-        <li class="nav-item dropdown active" style="margin-left: 50px;">
-            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?= isset($rows['city']) ? $rows['city']:"請選擇城市" ?>
-            </a>
+            <li class="nav-item dropdown active" style="margin-left: 50px;">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?= isset($rows['city']) ? $rows['city']:"請選擇城市" ?>
+                </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="?id=1">基隆市</a>
-                <a class="dropdown-item" href="?id=2">臺北市</a>
-                <a class="dropdown-item" href="?id=3">新北市</a>
-                <a class="dropdown-item" href="?id=4">桃園市</a>
-                <a class="dropdown-item" href="?id=5">新竹市</a>
-                <a class="dropdown-item" href="?id=6">新竹縣</a>
-                <a class="dropdown-item" href="?id=7">苗栗縣</a>
-                <a class="dropdown-item" href="?id=8">臺中市</a>
-                <a class="dropdown-item" href="?id=9">彰化縣</a>
-                <a class="dropdown-item" href="?id=10">南投縣</a>
-                <a class="dropdown-item" href="?id=11">雲林縣</a>
-                <a class="dropdown-item" href="?id=12">嘉義市</a>
-                <a class="dropdown-item" href="?id=13">嘉義縣</a>
-                <a class="dropdown-item" href="?id=14">臺南市</a>
-                <a class="dropdown-item" href="?id=15">高雄市</a>
-                <a class="dropdown-item" href="?id=16">屏東縣</a>
-                <a class="dropdown-item" href="?id=17">宜蘭縣</a>
-                <a class="dropdown-item" href="?id=18">花蓮縣</a>
-                <a class="dropdown-item" href="?id=19">台東縣</a>
-                <a class="dropdown-item" href="?id=20">澎湖縣</a>
-                <a class="dropdown-item" href="?id=21">金門縣</a>
-                <a class="dropdown-item" href="?id=22">連江縣</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="?id=1">基隆市</a>
+                    <a class="dropdown-item" href="?id=2">臺北市</a>
+                    <a class="dropdown-item" href="?id=3">新北市</a>
+                    <a class="dropdown-item" href="?id=4">桃園市</a>
+                    <a class="dropdown-item" href="?id=5">新竹市</a>
+                    <a class="dropdown-item" href="?id=6">新竹縣</a>
+                    <a class="dropdown-item" href="?id=7">苗栗縣</a>
+                    <a class="dropdown-item" href="?id=8">臺中市</a>
+                    <a class="dropdown-item" href="?id=9">彰化縣</a>
+                    <a class="dropdown-item" href="?id=10">南投縣</a>
+                    <a class="dropdown-item" href="?id=11">雲林縣</a>
+                    <a class="dropdown-item" href="?id=12">嘉義市</a>
+                    <a class="dropdown-item" href="?id=13">嘉義縣</a>
+                    <a class="dropdown-item" href="?id=14">臺南市</a>
+                    <a class="dropdown-item" href="?id=15">高雄市</a>
+                    <a class="dropdown-item" href="?id=16">屏東縣</a>
+                    <a class="dropdown-item" href="?id=17">宜蘭縣</a>
+                    <a class="dropdown-item" href="?id=18">花蓮縣</a>
+                    <a class="dropdown-item" href="?id=19">台東縣</a>
+                    <a class="dropdown-item" href="?id=20">澎湖縣</a>
+                    <a class="dropdown-item" href="?id=21">金門縣</a>
+                    <a class="dropdown-item" href="?id=22">連江縣</a>
 
-            </div>
-        </li>
+                </div>
+            </li>
 
 
         </ul>
